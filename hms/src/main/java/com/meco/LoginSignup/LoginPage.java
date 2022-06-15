@@ -205,7 +205,8 @@ public class LoginPage extends javax.swing.JFrame {
                         admin_page.setLocationRelativeTo(null);
                         this.dispose();
                         break;
-                    } else {
+                    } 
+                    else {
                         // error message
                         JOptionPane.showMessageDialog(null, "Invalid Password", "Login Failed", 2);
                     }
