@@ -9,9 +9,7 @@ public class Testing2 {
             map.put("jButton".concat(String.valueOf(i)), 2);
         }
 
-
-
-		System.out.println(map);
+        System.out.println(map);
         System.out.println("GenerateBtn");
     }
 }
