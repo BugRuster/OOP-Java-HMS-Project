@@ -133,10 +133,10 @@ public class AdminHomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_adminStaffBtnMouseClicked
 
     private void adminSettingsBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adminSettingsBtnMouseClicked
-        AdminSettingsPage admin_settings_page = new AdminSettingsPage();
-        admin_settings_page.setVisible(true);
-        admin_settings_page.pack();
-        admin_settings_page.setLocationRelativeTo(null);
+        AdminSettingsPage admin_rooms_page = new AdminSettingsPage();
+        admin_rooms_page.setVisible(true);
+        admin_rooms_page.pack();
+        admin_rooms_page.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_adminSettingsBtnMouseClicked
 
