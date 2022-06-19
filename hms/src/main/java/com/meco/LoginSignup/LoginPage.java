@@ -4,7 +4,7 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 
 import com.meco.DB.DB;
-import com.meco.MainPages.Admin.AdminHomePage;
+import com.meco.MainPages.Admin.HomePage.AdminHomePage;
 
 public class LoginPage extends javax.swing.JFrame {
     public LoginPage() {

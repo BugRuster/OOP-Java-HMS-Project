@@ -5,7 +5,7 @@
 package com.meco.LoginSignup;
 
 import com.meco.DB.DB;
-import com.meco.MainPages.Admin.AdminHomePage;
+import com.meco.MainPages.Admin.HomePage.AdminHomePage;
 import com.meco.MainPages.Developer.DeveloperPage;
 import com.meco.MainPages.Staff.StaffPage;
 import com.meco.MainPages.User.UserPage;

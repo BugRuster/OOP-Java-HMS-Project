@@ -29,14 +29,6 @@ public class Testing extends javax.swing.JFrame implements ActionListener {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        // JButton btns[] = new JButton[4];
-        // for (int i = 0; i < 4; i++) {
-        //     btns[i] = new JButton();
-        //     btns[i].setText("jButton" + String.valueOf(i));
-        //     btns[i].setBackground(new java.awt.Color(219, 35, 31));
-        //     btns[i].addActionListener(actionListener);
-        // }
-
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -132,35 +124,39 @@ public class Testing extends javax.swing.JFrame implements ActionListener {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    
-    // for (int i = 1; i < 5; i++) {
-    //     btnStates.put("jButton".concat(String.valueOf(i)), 0);
-    // }
-    // End of variables declaration//GEN-END:variables
+    Map<String, Integer> btnMap = Testing2.btnStates();
 
     ActionListener actionListener = new ActionListener() {
+        @Override
         public void actionPerformed(ActionEvent e) {
-            String btnState = e.getActionCommand().toString().concat("State");
-            javax.swing.JButton b = (javax.swing.JButton) e.getSource();
+            JButton btn = (JButton) e.getSource();
+            String btnName = btn.getText();
+            int btnState = btnMap.get(btnName);
 
-            // if (btnState.equals("0")) {b.setBackground(new java.awt.Color(219, 35, 31));}
-            // else if (btnState.equals("1")) {b.setBackground(new java.awt.Color(31, 219, 53));}
-            // else if (btnState.equals("2")) {b.setBackground(new java.awt.Color(34, 31, 219));}
+            if (btnState == 0) {
+                btn.setBackground(new java.awt.Color(31, 219, 53)); // Green background color
+                btnState++;
+                btnMap.put(btnName, btnState);
+            } else if (btnState == 1) {
+                btn.setBackground(new java.awt.Color(34, 31, 219)); // Blue background color
+                btnState++;
+                btnMap.put(btnName, btnState);
+            }  else if (btnState == 2) {
+                btn.setBackground(new java.awt.Color(219, 35, 31)); // Red background color
+                btnState *= 0;
+                btnMap.put(btnName, btnState);
+            }
+            System.out.println("---------------------------------------------------------------");
+            System.out.println(btnMap);
             System.out.println(btnState);
-            Testing3.gettingStates();
         }
     };
-
     @Override
-    public void actionPerformed(ActionEvent e) {
-        System.out.println(e.getSource()); 
-           
-    }
+    public void actionPerformed(ActionEvent e) {}
 }
 
 // public void actionPerformed(ActionEvent e) {
