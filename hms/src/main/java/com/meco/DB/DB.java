@@ -5,8 +5,6 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.swing.JOptionPane;
-import javax.xml.namespace.QName;
-
 import com.meco.MainPages.Admin.adminUtils;
 
 public class DB {
@@ -47,10 +45,10 @@ public class DB {
     }
 
     public static String[][] getUserData(int n) {
-        String data[][] = new String[n][3];
+        String data[][] = new String[n][5];
         Statement stmt;
         ResultSet rs;
-        String query = "SELECT * FROM userdata";
+        String query = "SELECT * FROM roomsData";
 
         try {
             stmt = DB.getConnection().createStatement();
@@ -58,12 +56,15 @@ public class DB {
             int i = 0;
             while (rs.next()) {
                 String name = rs.getString("name");
-                String email = rs.getString("email");
-                String age = rs.getString("age");
-
+                String phoneNo = rs.getString("phone_no");
+                String roomNo = rs.getString("room_no");
+                String checkInDate = rs.getString("check_in");
+                String checkOutDate = rs.getString("check_out");
                 data[i][0] = name;
-                data[i][1] = email;
-                data[i][2] = age;
+                data[i][1] = phoneNo;
+                data[i][2] = roomNo;
+                data[i][3] = checkInDate;
+                data[i][4] = checkOutDate;
                 i++;
             }
         } catch (Exception e) {
@@ -75,7 +76,7 @@ public class DB {
     public static int getSizeOfUserData() {
         Statement stmt;
         ResultSet rs;
-        String query = "SELECT * FROM userdata";
+        String query = "SELECT * FROM roomsData";
         int size = 0;
 
         try {
@@ -96,7 +97,7 @@ public class DB {
             String checkOutDate) {
         PreparedStatement stmt;
 
-        String query = "INSERT INTO roomsData (name, email, age, phone_no, room_no, ac_nonacRoom, singel_doubleBed, meal_noMeal, check_in, check_out) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        String query = "INSERT INTO roomsData (name, email, age, phone_no, room_no, ac_nonacRoom, single_doubleBed, meal_noMeal, check_in, check_out) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         try {
             stmt = getConnection().prepareStatement(query);
             stmt.setString(1, name);
@@ -120,7 +121,7 @@ public class DB {
 
     public static boolean createRoomStatus() {
         PreparedStatement stmt;
-        String query = "CREATE TABLE IF NOT EXISTS roomStatus (roomNumber INT, roomStatus INT);";
+        String query = "CREATE TABLE IF NOT EXISTS roomStatus (roomNumber INT, statusCode INT);";
         try {
             stmt = DB.getConnection().prepareStatement(query);
             stmt.executeUpdate();
@@ -141,7 +142,7 @@ public class DB {
             for (String i : keys) {
                 int roomNum = Integer.parseInt(i.substring(3));
                 int roomStatus = map.get(i);
-                String query = "INSERT INTO roomStatus (roomNumber, roomStatus) VALUES (?, ?)";
+                String query = "INSERT INTO roomStatus (roomNumber, statusCode) VALUES (?, ?)";
                 try {
                     stmt = getConnection().prepareStatement(query);
                     stmt.setInt(1, roomNum);
@@ -157,12 +158,12 @@ public class DB {
     public static String getRoomStatus(int roomNo) throws SQLException {
         String value = null;
         Statement stmt = null;
-        String query = "SELECT roomStatus FROM roomStatus WHERE roomNumber = " + roomNo + ";";
+        String query = "SELECT statusCode FROM roomStatus WHERE roomNumber = " + roomNo + ";";
         try {
             stmt = getConnection().createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while(rs.next()) {
-                value = rs.getString("roomStatus");
+                value = rs.getString("statusCode");
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -174,11 +175,12 @@ public class DB {
 
     public static boolean updateRoomStatus(int roomNo, int roomStatus) {
         PreparedStatement stmt;
-        String query = "UPDATE roomStatus SET roomStatus = ? WHERE roomNo = ?";
+        String query = "UPDATE roomStatus SET statusCode = ? WHERE roomNumber = ?;";
         try {
             stmt = getConnection().prepareStatement(query);
             stmt.setInt(1, roomStatus);
-            stmt.setString(2, "btn".concat(String.valueOf(roomNo)));
+            stmt.setInt(2, roomNo);
+            stmt.executeUpdate();
             return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -187,5 +189,6 @@ public class DB {
     }
 
     public static void main(String[] args) throws SQLException {
+        getSizeOfUserData();
     }
 }

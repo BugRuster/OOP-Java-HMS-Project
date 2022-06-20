@@ -36,6 +36,7 @@ public class AdminSettingsPage extends javax.swing.JFrame {
         adminRoomsBtn = new javax.swing.JMenu();
         adminStaffBtn = new javax.swing.JMenu();
         adminSettingsBtn = new javax.swing.JMenu();
+        refreshBtn = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,6 +81,15 @@ public class AdminSettingsPage extends javax.swing.JFrame {
             }
         });
         menuBar.add(adminSettingsBtn);
+
+        refreshBtn.setText("Refresh");
+        refreshBtn.setMargin(new java.awt.Insets(0, 465, 0, 0));
+        refreshBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshBtnActionPerformed(evt);
+            }
+        });
+        menuBar.add(refreshBtn);
 
         setJMenuBar(menuBar);
 
@@ -143,6 +153,14 @@ public class AdminSettingsPage extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_adminSettingsBtnMouseClicked
 
+    private void refreshBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtnActionPerformed
+        AdminSettingsPage page = new AdminSettingsPage();
+        page.setVisible(true);
+        page.pack();
+        page.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_refreshBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -187,5 +205,6 @@ public class AdminSettingsPage extends javax.swing.JFrame {
     private javax.swing.JMenu adminStaffBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenu refreshBtn;
     // End of variables declaration//GEN-END:variables
 }

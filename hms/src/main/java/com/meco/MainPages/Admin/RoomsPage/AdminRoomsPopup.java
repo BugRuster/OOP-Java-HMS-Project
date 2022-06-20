@@ -29,7 +29,7 @@ public class AdminRoomsPopup extends javax.swing.JFrame {
         underMaintainanceBtn = new javax.swing.JButton();
         checkinCustomerBtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         checkoutCustomerBtn.setBackground(new java.awt.Color(255, 255, 255));
         checkoutCustomerBtn.setText("Check-Out Customer");
@@ -84,7 +84,6 @@ public class AdminRoomsPopup extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void checkoutCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkoutCustomerBtnActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_checkoutCustomerBtnActionPerformed
 
     private void underMaintainanceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_underMaintainanceBtnActionPerformed
@@ -92,7 +91,11 @@ public class AdminRoomsPopup extends javax.swing.JFrame {
     }//GEN-LAST:event_underMaintainanceBtnActionPerformed
 
     private void checkinCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkinCustomerBtnActionPerformed
-        // TODO add your handling code here:
+        checkInCustomer page = new checkInCustomer();
+        page.setVisible(true);
+        page.pack();
+        page.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_checkinCustomerBtnActionPerformed
 
     /**

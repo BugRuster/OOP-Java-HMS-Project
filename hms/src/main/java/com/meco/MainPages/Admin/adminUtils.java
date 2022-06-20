@@ -4,6 +4,10 @@ import java.util.*;
 
 import javax.swing.JButton;
 
+import com.meco.MainPages.Admin.CustomerInfoPage.AdminCustomerInfoPage;
+import com.meco.MainPages.Admin.RoomsPage.AdminRoomsPage;
+import com.mysql.cj.xdevapi.AddResult;
+
 public class adminUtils {
     public static int[] getRoomNumbers() {
         int NUMBER_OF_ROOMS = 80;
@@ -35,24 +39,17 @@ public class adminUtils {
 
     public static void changeColour(JButton btn, int btnState) {
         if (btnState == 0) {
-            btn.setBackground(new java.awt.Color(31, 219, 53)); // Green background color
+            AdminRoomsPage.roomButton.setBackground(new java.awt.Color(31, 219, 53)); // Green background color
         } else if (btnState == 1) {
-            btn.setBackground(new java.awt.Color(219, 35, 31)); // Red background color
+            AdminRoomsPage.roomButton.setBackground(new java.awt.Color(219, 35, 31)); // Red background color
         }  else if (btnState == 2) {
-            btn.setBackground(new java.awt.Color(34, 31, 219)); // Blue background color
+            AdminRoomsPage.roomButton.setBackground(new java.awt.Color(34, 31, 219)); // Blue background color
         }
     }
 
     public static void main(String[] args) {
-        Map<String, Integer> map = getBtnStates();
-        Set<String> keys = map.keySet();
-        for (String i : keys) {
-            int num = Integer.parseInt(i.substring(3));
-            System.out.println(num);
-        }
+        changeColour(AdminRoomsPage.roomButton, 2);
     }
 }
-// keyset
-// loop -> .get(keyset[i])
 
 

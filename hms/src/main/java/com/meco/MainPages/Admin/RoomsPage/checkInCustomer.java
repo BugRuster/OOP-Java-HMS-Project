@@ -6,6 +6,7 @@ package com.meco.MainPages.Admin.RoomsPage;
 
 import java.sql.Date;
 
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import com.meco.DB.DB;
@@ -323,37 +324,50 @@ public class checkInCustomer extends javax.swing.JFrame {
 
 
         // safety checks for entering the data in the database
-        if (name.equals(null) || name.equals("Enter name")) {
-            JOptionPane.showMessageDialog(null, "Enter a valid name!", "Invalid Input", 2);
-        } else if (email.equals(null) || email.equals("Enter email ID")) {
-            JOptionPane.showMessageDialog(null, "Enter a valid email ID!", "Invalid Input", 2);
-        } else if (age.equals(null) || age.equals("Enter age")) {
-            JOptionPane.showMessageDialog(null, "Enter a valid age!", "Invalid Input", 2);
-        } else if (Integer.parseInt(age) < 0 || Integer.parseInt(age) > 100) {
-            JOptionPane.showMessageDialog(null, "Enter a valid age!", "Invalid Input", 2);
-        } else if (phoneNo.equals(null) || phoneNo.equals("Enter Phone No.") || phoneNo.length() < 10) {
-            JOptionPane.showMessageDialog(null, "Enter a valid phone number!", "Invalid Input", 2);
-        } else if (address.equals(null) || address.equals("Enter address")) {
-            JOptionPane.showMessageDialog(null, "Enter a valid address!", "Invalid Input", 2);
-        } else if (!validRoomNumber || roomStatus != 0) { // roomStatus == 0 means room is available
-            JOptionPane.showMessageDialog(null, "Invalid Room Number!", "Invalid Input", 2);
-        } else if (ac_nonAcRoom.equals("No input provided") || single_doubleBedRoom.equals("No input provided")) {
-            JOptionPane.showMessageDialog(null, "Select a valid Input!", "Invalid Input", 2);
-        } else if (checkInDate.equals(null) || checkOutDate.equals(null)) {
-            JOptionPane.showMessageDialog(null, "Please enter a valid Date!", "Invalid Input", 2);
-        } else { // means all values are valid and save them to the database
-            if (DB.addRoomData(name, email, Integer.parseInt(age), phoneNo, address, roomNo, ac_nonAcRoom, single_doubleBedRoom, mealCombo, checkInDate, checkOutDate)) {
-                int setRoomStatus = 1; // room status is 1 as it is not booked
-                DB.updateRoomStatus(roomNo, setRoomStatus); // updateRoomStatus in database
-                AdminRoomsPage page = new AdminRoomsPage(); // reopen admin rooms page
-                page.setVisible(true);
-                page.pack();
-                page.setLocationRelativeTo(null);
-                this.dispose();
-            }
-        }
+        // if (name.equals(null) || name.equals("Enter name")) {
+        //     JOptionPane.showMessageDialog(null, "Enter a valid name!", "Invalid Input", 2);
+        // } else if (email.equals(null) || email.equals("Enter email ID")) {
+        //     JOptionPane.showMessageDialog(null, "Enter a valid email ID!", "Invalid Input", 2);
+        // } else if (age.equals(null) || age.equals("Enter age")) {
+        //     JOptionPane.showMessageDialog(null, "Enter a valid age!", "Invalid Input", 2);
+        // } else if (Integer.parseInt(age) < 0 || Integer.parseInt(age) > 100) {
+        //     JOptionPane.showMessageDialog(null, "Enter a valid age!", "Invalid Input", 2);
+        // } else if (phoneNo.equals(null) || phoneNo.equals("Enter Phone No.") || phoneNo.length() < 10) {
+        //     JOptionPane.showMessageDialog(null, "Enter a valid phone number!", "Invalid Input", 2);
+        // } else if (address.equals(null) || address.equals("Enter address")) {
+        //     JOptionPane.showMessageDialog(null, "Enter a valid address!", "Invalid Input", 2);
+        // } else if (!validRoomNumber || roomStatus != 0 || !String.valueOf(roomNo).equals(AdminRoomsPage.roomButton.getText())) { // roomStatus == 0 means room is available
+        //     JOptionPane.showMessageDialog(null, "Invalid Room Number!", "Invalid Input", 2);
+        // } else if (ac_nonAcRoom.equals("No input provided") || single_doubleBedRoom.equals("No input provided")) {
+        //     JOptionPane.showMessageDialog(null, "Select a valid Input!", "Invalid Input", 2);
+        // } else if (checkInDate.equals(null) || checkOutDate.equals(null)) {
+        //     JOptionPane.showMessageDialog(null, "Please enter a valid Date!", "Invalid Input", 2);
+        // } else { // means all values are valid and save them to the database
+        //     if (DB.addRoomData(name, email, Integer.parseInt(age), phoneNo, address, roomNo, ac_nonAcRoom, single_doubleBedRoom, mealCombo, checkInDate, checkOutDate)) {
+        //         int setRoomStatus = 1; // room status is 1 as it is booked
+        //         DB.updateRoomStatus(roomNo, setRoomStatus); // updateRoomStatus in database
+        //         AdminRoomsPage page = new AdminRoomsPage(); // reopen admin rooms page
+        //         page.setVisible(true);
+        //         page.pack();
+        //         page.setLocationRelativeTo(null);
+        //         this.dispose(); 
+        //         adminUtils.changeColour(AdminRoomsPage.roomButton, setRoomStatus);
+        //         System.out.println("btn got clicked");
+        //         System.out.println("roomNo: " + roomNo);
+        //         System.out.println("setRoomStatus: " + setRoomStatus);
+        //         System.out.println("roomButton: " + AdminRoomsPage.roomButton);
+        //     }
+        // }
 
-    }//GEN-LAST:event_bookRoomBtnActionPerformed
+        AdminRoomsPage page = new AdminRoomsPage();
+        page.setVisible(true);
+        page.pack();
+        page.setLocationRelativeTo(null);
+        adminUtils.changeColour(AdminRoomsPage.roomButton, 2);
+        System.out.println(AdminRoomsPage.roomButton);
+        System.out.println("btn got clicked");
+
+    }//GEN-LAST:event_bookRoomBtnActionPerformeds
 
     private void nameFieldFocusGained(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_nameFieldFocusGained
         if (nameField.getText().equals("Enter name")) {
