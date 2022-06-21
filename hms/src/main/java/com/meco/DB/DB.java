@@ -73,12 +73,11 @@ public class DB {
         return data;
     }
 
-    public static int getSizeOfUserData() {
+    public static int getSizeOfTable(String tableName) {
         Statement stmt;
         ResultSet rs;
-        String query = "SELECT * FROM roomsData";
+        String query = "SELECT * FROM " + tableName;
         int size = 0;
-
         try {
             stmt = DB.getConnection().createStatement();
             rs = stmt.executeQuery(query);
@@ -89,7 +88,6 @@ public class DB {
             System.out.println(e.getMessage());
         }
         return size;
-
     }
 
     public static boolean addRoomData(String name, String email, int age, String phoneNo, String address, int roomNo,
@@ -189,6 +187,5 @@ public class DB {
     }
 
     public static void main(String[] args) throws SQLException {
-        getSizeOfUserData();
     }
 }

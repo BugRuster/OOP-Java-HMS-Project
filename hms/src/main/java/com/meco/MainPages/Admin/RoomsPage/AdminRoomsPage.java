@@ -1357,25 +1357,17 @@ public class AdminRoomsPage extends javax.swing.JFrame {
 	private javax.swing.JLabel roomIsBookedLabel;
 	private javax.swing.JLabel underMaintainanceLabel;
 	private javax.swing.JMenuBar menuBar;
+	public static JButton roomButton;
 	Map<String, Integer> btnMap = adminUtils.getBtnStates();
 	// End of variables declaration//GEN-END:variables
 
 	ActionListener actionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JButton btn = (JButton) e.getSource();
-			int btnNo = Integer.parseInt(btn.getText());
-			try {
-				int btnState = Integer.parseInt(DB.getRoomStatus(btnNo));
-				AdminRoomsPopup popup = new AdminRoomsPopup(); // open popup
-				popup.setVisible(true);
-				popup.setLocationRelativeTo(null);
-				adminUtils.changeColour(btn, btnState); // change colour of button depending on state of room
-			} catch (NumberFormatException e1) {
-				System.out.println(e1.getMessage());
-			} catch (SQLException e1) {
-				System.out.println(e1.getMessage());
-			}
+			roomButton = (JButton) e.getSource();
+			AdminRoomsPopup popup = new AdminRoomsPopup(); // open popup
+			popup.setVisible(true);
+			popup.setLocationRelativeTo(null);
 		}
 	};
 }

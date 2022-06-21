@@ -44,7 +44,7 @@ public class AdminCustomerInfoPage extends javax.swing.JFrame {
 
         userDataTable.setFont(new java.awt.Font("AppleGothic", 0, 12)); // NOI18N
         userDataTable.setModel(new javax.swing.table.DefaultTableModel(
-            DB.getUserData(DB.getSizeOfUserData()),
+            DB.getUserData(DB.getSizeOfTable("roomsData")),
             new String [] {
                 "Name", "Phone No.", "Room No.", "Check-In", "Check-Out"
             }
