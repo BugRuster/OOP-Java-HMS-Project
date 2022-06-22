@@ -53,6 +53,8 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="262" max="-2" attributes="0"/>
                               <Component id="bookRoomBtn" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="302" max="32767" attributes="0"/>
+                              <Component id="backBtn" min="-2" pref="57" max="-2" attributes="0"/>
                           </Group>
                           <Component id="roomDetailsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
@@ -96,7 +98,7 @@
                       <Component id="titleLabel" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="53" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -132,38 +134,46 @@
               <Component id="addressLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="addressField" min="-2" pref="45" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-              <Component id="roomDetailsLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="roomNoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="roomNoField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="roomDetailsLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="roomNoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="roomNoField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                              <Component id="mealComboRadioBtn" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="acRadioBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="nonAcRadioBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="checkInLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="checkInField" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="singleBedRadioBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="doubleBedRadioBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="checkOutLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="checkOutField" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                      <Component id="mealComboRadioBtn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="bookRoomBtn" min="-2" pref="44" max="-2" attributes="0"/>
+                      <EmptySpace pref="33" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="acRadioBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="nonAcRadioBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="checkInLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="checkInField" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="singleBedRadioBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="doubleBedRadioBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="checkOutLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="checkOutField" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="backBtn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="bookRoomBtn" min="-2" pref="44" max="-2" attributes="0"/>
-              <EmptySpace pref="33" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -290,6 +300,13 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="roomNoField">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0"/>
+      </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="roomNoFieldFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="roomNoFieldFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="mealComboRadioBtn">
       <Properties>
@@ -350,6 +367,17 @@
     <Component class="javax.swing.JTextField" name="checkOutField">
     </Component>
     <Component class="javax.swing.JTextField" name="checkInField">
+    </Component>
+    <Component class="javax.swing.JButton" name="backBtn">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Back"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backBtnActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

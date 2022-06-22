@@ -123,9 +123,6 @@ public class AdminCustomerInfoPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void getValues() {
-    }
-
     private void adminHomeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adminHomeBtnMouseClicked
         AdminHomePage admin_home_page = new AdminHomePage();
         admin_home_page.setVisible(true);

@@ -4,10 +4,6 @@ import java.util.*;
 
 import javax.swing.JButton;
 
-import com.meco.MainPages.Admin.CustomerInfoPage.AdminCustomerInfoPage;
-import com.meco.MainPages.Admin.RoomsPage.AdminRoomsPage;
-import com.mysql.cj.xdevapi.AddResult;
-
 public class adminUtils {
     public static int[] getRoomNumbers() {
         int NUMBER_OF_ROOMS = 80;
@@ -39,16 +35,15 @@ public class adminUtils {
 
     public static void changeColour(JButton btn, int btnState) {
         if (btnState == 0) {
-            AdminRoomsPage.roomButton.setBackground(new java.awt.Color(31, 219, 53)); // Green background color
+            btn.setBackground(new java.awt.Color(31, 219, 53)); // Green background color
         } else if (btnState == 1) {
-            AdminRoomsPage.roomButton.setBackground(new java.awt.Color(219, 35, 31)); // Red background color
+            btn.setBackground(new java.awt.Color(219, 35, 31)); // Red background color
         }  else if (btnState == 2) {
-            AdminRoomsPage.roomButton.setBackground(new java.awt.Color(34, 31, 219)); // Blue background color
+            btn.setBackground(new java.awt.Color(34, 31, 219)); // Blue background color
         }
     }
 
     public static void main(String[] args) {
-        changeColour(AdminRoomsPage.roomButton, 2);
     }
 }
 

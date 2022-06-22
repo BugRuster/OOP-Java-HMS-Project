@@ -3,10 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.meco.MainPages.Admin.RoomsPage;
+import java.sql.*;
 
-import java.sql.Date;
-
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import com.meco.DB.DB;
@@ -60,8 +58,9 @@ public class checkInCustomer extends javax.swing.JFrame {
         checkOutLabel = new javax.swing.JLabel();
         checkOutField = new javax.swing.JTextField();
         checkInField = new javax.swing.JTextField();
+        backBtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         emailField.setText("Enter email ID");
         emailField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -145,6 +144,16 @@ public class checkInCustomer extends javax.swing.JFrame {
         roomDetailsLabel.setFont(new java.awt.Font("AppleGothic", 0, 18)); // NOI18N
         roomDetailsLabel.setText("Room Details");
 
+        roomNoField.setText("0");
+        roomNoField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                roomNoFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                roomNoFieldFocusLost(evt);
+            }
+        });
+
         mealComboRadioBtn.setBackground(new java.awt.Color(255, 255, 255));
         mealComboRadioBtn.setText("Meal Combo");
 
@@ -165,6 +174,14 @@ public class checkInCustomer extends javax.swing.JFrame {
 
         checkOutLabel.setFont(new java.awt.Font("AppleGothic", 0, 14)); // NOI18N
         checkOutLabel.setText("Check-Out Date");
+
+        backBtn.setBackground(new java.awt.Color(255, 255, 255));
+        backBtn.setText("Back");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
 
         ac_nonAcBtnGroup.add(acRadioBtn);
         ac_nonAcBtnGroup.add(nonAcRadioBtn);
@@ -196,7 +213,9 @@ public class checkInCustomer extends javax.swing.JFrame {
                                     .addComponent(phoneNoField, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(262, 262, 262)
-                                .addComponent(bookRoomBtn))
+                                .addComponent(bookRoomBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 302, Short.MAX_VALUE)
+                                .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(roomDetailsLabel, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,7 +246,7 @@ public class checkInCustomer extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addComponent(titleLabel)))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,52 +275,66 @@ public class checkInCustomer extends javax.swing.JFrame {
                 .addComponent(addressLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addressField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
-                .addComponent(roomDetailsLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(roomNoLabel)
-                            .addComponent(roomNoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(8, 8, 8)
-                        .addComponent(mealComboRadioBtn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(acRadioBtn)
-                            .addComponent(nonAcRadioBtn)
-                            .addComponent(checkInLabel)
-                            .addComponent(checkInField, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(7, 7, 7)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(singleBedRadioBtn)
-                            .addComponent(doubleBedRadioBtn)
-                            .addComponent(checkOutLabel)
-                            .addComponent(checkOutField, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(4, 4, 4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bookRoomBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                        .addGap(24, 24, 24)
+                        .addComponent(roomDetailsLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(roomNoLabel)
+                                    .addComponent(roomNoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(8, 8, 8)
+                                .addComponent(mealComboRadioBtn))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(acRadioBtn)
+                                    .addComponent(nonAcRadioBtn)
+                                    .addComponent(checkInLabel)
+                                    .addComponent(checkInField, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(7, 7, 7)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(singleBedRadioBtn)
+                                    .addComponent(doubleBedRadioBtn)
+                                    .addComponent(checkOutLabel)
+                                    .addComponent(checkOutField, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bookRoomBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(33, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(backBtn)
+                        .addContainerGap())))
         );
-        setVisible(true);
+
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bookRoomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookRoomBtnActionPerformed
-        // creating all variables for the values received from the form
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        AdminRoomsPage page = new AdminRoomsPage();
+        page.setVisible(true);
+        page.pack();
+        page.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_backBtnActionPerformed
+
+    private void bookRoomBtnActionPerformed(java.awt.event.ActionEvent evt) {
+        // getting all the values
         String name = nameField.getText();
         String email = emailField.getText();
         String age = ageField.getText();
-        String phoneNo =  phoneNoField.getText();
+        String phoneNo = phoneNoField.getText();
         String address = addressField.getText();
-        int roomNo = Integer.parseInt(roomNoField.getText());
+        String roomNoString = roomNoField.getText();
 
         boolean validRoomNumber = false;
-        for (int i : adminUtils.getRoomNumbers()) {
-            if (i == roomNo) { validRoomNumber = true; break; } // returns true only if room number is in the array
+        if (!roomNoString.equals("0")) {
+            for (int i : adminUtils.getRoomNumbers()) {
+                if (roomNoString.equals(String.valueOf(i))) {validRoomNumber = true; break;
+            }
         }
-        int roomStatus = adminUtils.getBtnStates().get("btn".concat(String.valueOf(roomNo))); // getting the status of the room
+        String roomStatus = DB.getRoomStatus(Integer.parseInt(roomNoString)); // getting the status of the room
 
         // get the value of ac or non ac room field from the radio buttonGroup
         String ac_nonAcRoom = null;
@@ -315,6 +348,16 @@ public class checkInCustomer extends javax.swing.JFrame {
         else if (doubleBedRadioBtn.isSelected()) single_doubleBedRoom = "Double-Bed Room";
         else single_doubleBedRoom = "No input provided";
 
+        // check if the email exists in the database
+        String storedEmail = null;
+        Statement stmt;
+        String query = "SELECT email FROM userData WHERE email = '" + email +"';";
+        try {
+            stmt = DB.getConnection().createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()) {storedEmail = rs.getString(1);}
+        } catch (Exception e) {System.out.println(e.getMessage());}
+        
         // get the value of the meal combo radio button
         String mealCombo = null;
         if (mealComboRadioBtn.isSelected()) mealCombo = "Meal Combo";
@@ -323,52 +366,56 @@ public class checkInCustomer extends javax.swing.JFrame {
         String checkInDate = checkInField.getText();
         String checkOutDate = checkOutField.getText();
 
-
         // safety checks for entering the data in the database
-        // if (name.equals(null) || name.equals("Enter name")) {
-        //     JOptionPane.showMessageDialog(null, "Enter a valid name!", "Invalid Input", 2);
-        // } else if (email.equals(null) || email.equals("Enter email ID")) {
-        //     JOptionPane.showMessageDialog(null, "Enter a valid email ID!", "Invalid Input", 2);
-        // } else if (age.equals(null) || age.equals("Enter age")) {
-        //     JOptionPane.showMessageDialog(null, "Enter a valid age!", "Invalid Input", 2);
-        // } else if (Integer.parseInt(age) < 0 || Integer.parseInt(age) > 100) {
-        //     JOptionPane.showMessageDialog(null, "Enter a valid age!", "Invalid Input", 2);
-        // } else if (phoneNo.equals(null) || phoneNo.equals("Enter Phone No.") || phoneNo.length() < 10) {
-        //     JOptionPane.showMessageDialog(null, "Enter a valid phone number!", "Invalid Input", 2);
-        // } else if (address.equals(null) || address.equals("Enter address")) {
-        //     JOptionPane.showMessageDialog(null, "Enter a valid address!", "Invalid Input", 2);
-        // } else if (!validRoomNumber || roomStatus != 0 || !String.valueOf(roomNo).equals(AdminRoomsPage.roomButton.getText())) { // roomStatus == 0 means room is available
-        //     JOptionPane.showMessageDialog(null, "Invalid Room Number!", "Invalid Input", 2);
-        // } else if (ac_nonAcRoom.equals("No input provided") || single_doubleBedRoom.equals("No input provided")) {
-        //     JOptionPane.showMessageDialog(null, "Select a valid Input!", "Invalid Input", 2);
-        // } else if (checkInDate.equals(null) || checkOutDate.equals(null)) {
-        //     JOptionPane.showMessageDialog(null, "Please enter a valid Date!", "Invalid Input", 2);
-        // } else { // means all values are valid and save them to the database
-        //     if (DB.addRoomData(name, email, Integer.parseInt(age), phoneNo, address, roomNo, ac_nonAcRoom, single_doubleBedRoom, mealCombo, checkInDate, checkOutDate)) {
-        //         int setRoomStatus = 1; // room status is 1 as it is booked
-        //         DB.updateRoomStatus(roomNo, setRoomStatus); // updateRoomStatus in database
-        //         AdminRoomsPage page = new AdminRoomsPage(); // reopen admin rooms page
-        //         page.setVisible(true);
-        //         page.pack();
-        //         page.setLocationRelativeTo(null);
-        //         this.dispose(); 
-        //         adminUtils.changeColour(AdminRoomsPage.roomButton, setRoomStatus);
-        //         System.out.println("btn got clicked");
-        //         System.out.println("roomNo: " + roomNo);
-        //         System.out.println("setRoomStatus: " + setRoomStatus);
-        //         System.out.println("roomButton: " + AdminRoomsPage.roomButton);
-        //     }
-        // }
+        if (name.equals(null) || name.equals("Enter name")) {
+            JOptionPane.showMessageDialog(null, "Invalid name entered", "Booking Fail", 2);
+        } 
+        else if (email.equals(null) || email.equals("Enter email") || !email.equals(storedEmail)) {
+            JOptionPane.showMessageDialog(null, "Invalid email entered", "Booking Fail", 2); 
+        } 
+        else if (age.equals(null) || age.equals("Enter age") || Integer.parseInt(age) < 0 || Integer.parseInt(age) > 100) {
+            JOptionPane.showMessageDialog(null, "Invalid age entered", "Booking Fail", 2);
+        } 
+        else if (phoneNo.equals(null) || phoneNo.equals("Enter Phone No.") || phoneNo.length() < 10) {
+            JOptionPane.showMessageDialog(null, "Invalid Phone No. entered", "Booking Fail", 2);
+        }
+        else if (address.equals(null) || address.equals("Enter address")) {
+            JOptionPane.showMessageDialog(null, "Invalid address entered", "Booking Fail", 2);
+        }
+        else if (!validRoomNumber || !roomStatus.equals("0") || !roomNoString.equals(AdminRoomsPage.roomButton.getText())) { // roomStatus == 0 means room is available
+            JOptionPane.showMessageDialog(null, "Invalid room number entered", "Booking Fail", 2);
+        }
+        else if (ac_nonAcRoom.equals("No input provided") || single_doubleBedRoom.equals("No input provided")) {
+            JOptionPane.showMessageDialog(null, "Select a valid Input!", "Booking Fail", 2);
+        }
+        else if (checkInDate.equals(null) || checkOutDate.equals(null)) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid Date!", "Booking Fail", 2);
+        }
+        else { // means all values are valid and save them to the database
+            if (DB.addRoomData(name, email, Integer.parseInt(age), phoneNo, address, Integer.parseInt(roomNoString), ac_nonAcRoom, single_doubleBedRoom, mealCombo, checkInDate, checkOutDate)) {
+                int newRoomStatus = 1; // room status is 1 as it is booked
+                DB.updateRoomStatus(Integer.parseInt(roomNoString), newRoomStatus);
+                adminUtils.changeColour(AdminRoomsPage.roomButton, newRoomStatus);
+                this.dispose(); 
+            }
+            System.out.println(name);
+            System.out.println(email);
+            System.out.println(storedEmail);
 
-        AdminRoomsPage page = new AdminRoomsPage();
-        page.setVisible(true);
-        page.pack();
-        page.setLocationRelativeTo(null);
-        adminUtils.changeColour(AdminRoomsPage.roomButton, 2);
-        System.out.println(AdminRoomsPage.roomButton);
-        System.out.println("btn got clicked");
+            System.out.println(age);
+            System.out.println(phoneNo);
+            System.out.println(address);
 
-    }//GEN-LAST:event_bookRoomBtnActionPerformeds
+            System.out.println(roomNoString);
+            System.out.println(validRoomNumber);
+            System.out.println(roomStatus);
+            System.out.println(AdminRoomsPage.roomButton.getText());
+
+            System.out.println(checkInDate);
+            System.out.println(checkOutDate);
+        }
+        }
+    }
 
     private void nameFieldFocusGained(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_nameFieldFocusGained
         if (nameField.getText().equals("Enter name")) {
@@ -430,6 +477,18 @@ public class checkInCustomer extends javax.swing.JFrame {
         }
     }// GEN-LAST:event_addressFieldFocusLost //
 
+    private void roomNoFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_roomNoFieldFocusGained
+        if (roomNoField.getText().equals("0")) {
+            roomNoField.setText("");
+        }
+    }//GEN-LAST:event_roomNoFieldFocusGained
+
+    private void roomNoFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_roomNoFieldFocusLost
+        if (roomNoField.getText().equals("") || roomNoField.getText().equals("0")) {
+            roomNoField.setText("0");
+        }
+    }//GEN-LAST:event_roomNoFieldFocusLost
+
     /**
      * @param args the command line arguments
      */
@@ -480,6 +539,7 @@ public class checkInCustomer extends javax.swing.JFrame {
     private javax.swing.JLabel addressLabel;
     private javax.swing.JTextField ageField;
     private javax.swing.JLabel ageLabel;
+    private javax.swing.JButton backBtn;
     private javax.swing.JButton bookRoomBtn;
     private javax.swing.JTextField checkInField;
     private javax.swing.JLabel checkInLabel;

@@ -4,6 +4,11 @@
  */
 package com.meco.MainPages.Admin.RoomsPage;
 
+import javax.swing.JOptionPane;
+
+import com.meco.DB.DB;
+import com.meco.MainPages.Admin.adminUtils;
+
 /**
  *
  * @author ashishkumar
@@ -84,18 +89,42 @@ public class AdminRoomsPopup extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void checkoutCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkoutCustomerBtnActionPerformed
+        int roomNo = Integer.parseInt(AdminRoomsPage.roomButton.getText());
+        if (DB.getRoomStatus(roomNo).equals("1")) { // roomStatus = 1 is room is booked
+            checkOutCustomer page = new checkOutCustomer();
+            page.setVisible(true);
+            page.pack();
+            page.setLocationRelativeTo(null);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Room is already empty", "Invalid Input", 2);
+        }
     }//GEN-LAST:event_checkoutCustomerBtnActionPerformed
 
     private void underMaintainanceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_underMaintainanceBtnActionPerformed
-        // TODO add your handling code here:
+        int roomNo = Integer.parseInt(AdminRoomsPage.roomButton.getText());
+        if (DB.getRoomStatus(roomNo).equals("0")) { // if room status is 0 the you can put it under maintainance
+            roomUnderMaintainance page = new roomUnderMaintainance();
+            page.setVisible(true);
+            page.pack();
+            page.setLocationRelativeTo(null);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Room is either under maintainance or booked", "Invalid Input", 2);
+        }
     }//GEN-LAST:event_underMaintainanceBtnActionPerformed
 
     private void checkinCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkinCustomerBtnActionPerformed
-        checkInCustomer page = new checkInCustomer();
-        page.setVisible(true);
-        page.pack();
-        page.setLocationRelativeTo(null);
-        this.dispose();
+        int roomNo = Integer.parseInt(AdminRoomsPage.roomButton.getText());
+        if (DB.getRoomStatus(roomNo).equals("0")) { // if room status is 0 then room is avilable 
+            checkInCustomer page = new checkInCustomer();
+            page.setVisible(true);
+            page.pack();
+            page.setLocationRelativeTo(null);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Room is already booked", "Invalid Input", 2);
+        }
     }//GEN-LAST:event_checkinCustomerBtnActionPerformed
 
     /**

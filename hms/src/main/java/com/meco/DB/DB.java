@@ -153,7 +153,7 @@ public class DB {
         }
     }
 
-    public static String getRoomStatus(int roomNo) throws SQLException {
+    public static String getRoomStatus(int roomNo) {
         String value = null;
         Statement stmt = null;
         String query = "SELECT statusCode FROM roomStatus WHERE roomNumber = " + roomNo + ";";
@@ -165,8 +165,6 @@ public class DB {
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
-        } finally {
-            if (stmt != null) { stmt.close(); }
         }
         return value;
     }
@@ -182,6 +180,21 @@ public class DB {
             return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
+            return false;
+        }
+    }
+
+    public static boolean deleteUser(String condition, String value) {
+        PreparedStatement stmt;
+        String query = "DELETE FROM roomsData WHERE ? = ?";
+        try {
+            stmt = getConnection().prepareStatement(query);
+            stmt.setString(1, condition);
+            stmt.setString(2, value);
+            stmt.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
             return false;
         }
     }

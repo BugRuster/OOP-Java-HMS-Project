@@ -5,7 +5,6 @@
 package com.meco.MainPages.Admin.RoomsPage;
 
 import java.awt.event.*;
-import java.sql.SQLException;
 import java.util.*;
 
 import javax.swing.JButton;
@@ -162,7 +161,7 @@ public class AdminRoomsPage extends javax.swing.JFrame {
 
 		for (int i = 0; i < 80; i++) {
 			JButton btn = (JButton) btns[i];
-			btn.setBackground(new java.awt.Color(255, 255, 255));
+			adminUtils.changeColour(btn, Integer.parseInt(DB.getRoomStatus(roomNums[i])));
 			btn.setFont(new java.awt.Font("AppleGothic", 0, 10)); // NOI18N
 			btn.setText(String.valueOf(roomNums[i]));
 			btn.setFocusPainted(false);
@@ -1358,7 +1357,6 @@ public class AdminRoomsPage extends javax.swing.JFrame {
 	private javax.swing.JLabel underMaintainanceLabel;
 	private javax.swing.JMenuBar menuBar;
 	public static JButton roomButton;
-	Map<String, Integer> btnMap = adminUtils.getBtnStates();
 	// End of variables declaration//GEN-END:variables
 
 	ActionListener actionListener = new ActionListener() {
