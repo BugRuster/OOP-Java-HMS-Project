@@ -4,6 +4,9 @@
  */
 package com.meco.MainPages.Admin.RoomsPage;
 import java.sql.*;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JOptionPane;
 
@@ -21,6 +24,11 @@ public class checkInCustomer extends javax.swing.JFrame {
      */
     public checkInCustomer() {
         initComponents();
+        ac_nonAcBtnGroup.add(acRadioBtn);
+        ac_nonAcBtnGroup.add(nonAcRadioBtn);
+
+        single_doubleBedBtnGroup.add(singleBedRadioBtn);
+        single_doubleBedBtnGroup.add(doubleBedRadioBtn);
     }
 
     /**
@@ -56,9 +64,9 @@ public class checkInCustomer extends javax.swing.JFrame {
         doubleBedRadioBtn = new javax.swing.JRadioButton();
         checkInLabel = new javax.swing.JLabel();
         checkOutLabel = new javax.swing.JLabel();
-        checkOutField = new javax.swing.JTextField();
-        checkInField = new javax.swing.JTextField();
         backBtn = new javax.swing.JButton();
+        checkInDateChooser = new com.toedter.calendar.JDateChooser();
+        checkOutDateChooser = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -183,11 +191,9 @@ public class checkInCustomer extends javax.swing.JFrame {
             }
         });
 
-        ac_nonAcBtnGroup.add(acRadioBtn);
-        ac_nonAcBtnGroup.add(nonAcRadioBtn);
+        checkInDateChooser.setBackground(new java.awt.Color(255, 255, 255));
 
-        single_doubleBedBtnGroup.add(singleBedRadioBtn);
-        single_doubleBedBtnGroup.add(doubleBedRadioBtn);
+        checkOutDateChooser.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -198,51 +204,54 @@ public class checkInCustomer extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(58, 58, 58)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(nameLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ageLabel)
-                                    .addComponent(ageField, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(addressLabel)
-                                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(99, 99, 99)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(emailLabel)
-                                    .addComponent(phoneNoLabel)
-                                    .addComponent(phoneNoField, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(262, 262, 262)
                                 .addComponent(bookRoomBtn)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 302, Short.MAX_VALUE)
                                 .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(roomDetailsLabel, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(mealComboRadioBtn)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(roomNoLabel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(roomNoField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(acRadioBtn)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(nonAcRadioBtn))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(singleBedRadioBtn)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(doubleBedRadioBtn)))
-                                .addGap(34, 34, 34)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(checkOutLabel)
-                                    .addComponent(checkInLabel))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(checkOutField)
-                                    .addComponent(checkInField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(addressField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(nameLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(ageLabel)
+                                            .addComponent(ageField, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(addressLabel)
+                                            .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(99, 99, 99)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(emailLabel)
+                                            .addComponent(phoneNoLabel)
+                                            .addComponent(phoneNoField, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(roomDetailsLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(mealComboRadioBtn)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(roomNoLabel)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(roomNoField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(acRadioBtn)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(nonAcRadioBtn))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(singleBedRadioBtn)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(doubleBedRadioBtn)))
+                                        .addGap(34, 34, 34)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(checkOutLabel)
+                                            .addComponent(checkInLabel))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(checkInDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(checkOutDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(addressField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addComponent(titleLabel)))
@@ -277,35 +286,38 @@ public class checkInCustomer extends javax.swing.JFrame {
                 .addComponent(addressField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(roomDetailsLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(roomDetailsLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(roomNoLabel)
                                     .addComponent(roomNoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(8, 8, 8)
                                 .addComponent(mealComboRadioBtn))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(acRadioBtn)
-                                    .addComponent(nonAcRadioBtn)
-                                    .addComponent(checkInLabel)
-                                    .addComponent(checkInField, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(7, 7, 7)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(singleBedRadioBtn)
-                                    .addComponent(doubleBedRadioBtn)
-                                    .addComponent(checkOutLabel)
-                                    .addComponent(checkOutField, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(49, 49, 49)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(checkInDateChooser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(acRadioBtn)
+                                        .addComponent(nonAcRadioBtn)
+                                        .addComponent(checkInLabel)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(singleBedRadioBtn)
+                                        .addComponent(doubleBedRadioBtn)
+                                        .addComponent(checkOutLabel))
+                                    .addComponent(checkOutDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(bookRoomBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(33, Short.MAX_VALUE))
+                        .addGap(0, 27, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(backBtn)
-                        .addContainerGap())))
+                        .addComponent(backBtn)))
+                .addContainerGap())
         );
 
         pack();
@@ -331,15 +343,15 @@ public class checkInCustomer extends javax.swing.JFrame {
         boolean validRoomNumber = false;
         if (!roomNoString.equals("0")) {
             for (int i : adminUtils.getRoomNumbers()) {
-                if (roomNoString.equals(String.valueOf(i))) {validRoomNumber = true; break;
+                if (roomNoString.equals(String.valueOf(i))) {validRoomNumber = true; break;}
             }
         }
         String roomStatus = DB.getRoomStatus(Integer.parseInt(roomNoString)); // getting the status of the room
 
         // get the value of ac or non ac room field from the radio buttonGroup
         String ac_nonAcRoom = null;
-        if (acRadioBtn.isSelected()) ac_nonAcRoom = "AC Rooom";
-        else if (nonAcRadioBtn.isSelected()) ac_nonAcRoom = "Non-AC Rooom";
+        if (acRadioBtn.isSelected()) ac_nonAcRoom = "AC Room";
+        else if (nonAcRadioBtn.isSelected()) ac_nonAcRoom = "Non-AC Room";
         else ac_nonAcRoom = "No input provided";
 
         // get the value of single or double bed field from the radio buttonGroup
@@ -363,8 +375,16 @@ public class checkInCustomer extends javax.swing.JFrame {
         if (mealComboRadioBtn.isSelected()) mealCombo = "Meal Combo";
         else mealCombo = "No Meal Combo";
 
-        String checkInDate = checkInField.getText();
-        String checkOutDate = checkOutField.getText();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String checkInDateString = sdf.format(checkInDateChooser.getDate());
+        String checkOutDateString = sdf.format(checkOutDateChooser.getDate());
+
+        Date checkInDate = null;
+        Date checkOutDate = null;
+        try {
+            checkInDate = sdf.parse(checkInDateString);
+            checkOutDate = sdf.parse(checkOutDateString);
+        } catch (ParseException e) {System.out.println(e.getMessage());}
 
         // safety checks for entering the data in the database
         if (name.equals(null) || name.equals("Enter name")) {
@@ -388,32 +408,16 @@ public class checkInCustomer extends javax.swing.JFrame {
         else if (ac_nonAcRoom.equals("No input provided") || single_doubleBedRoom.equals("No input provided")) {
             JOptionPane.showMessageDialog(null, "Select a valid Input!", "Booking Fail", 2);
         }
-        else if (checkInDate.equals(null) || checkOutDate.equals(null)) {
+        else if (checkInDate.after(checkOutDate)) {
             JOptionPane.showMessageDialog(null, "Please enter a valid Date!", "Booking Fail", 2);
         }
         else { // means all values are valid and save them to the database
-            if (DB.addRoomData(name, email, Integer.parseInt(age), phoneNo, address, Integer.parseInt(roomNoString), ac_nonAcRoom, single_doubleBedRoom, mealCombo, checkInDate, checkOutDate)) {
+            if (DB.addRoomData(name, email, Integer.parseInt(age), phoneNo, address, Integer.parseInt(roomNoString), ac_nonAcRoom, single_doubleBedRoom, mealCombo, checkInDateString, checkOutDateString)) {
                 int newRoomStatus = 1; // room status is 1 as it is booked
                 DB.updateRoomStatus(Integer.parseInt(roomNoString), newRoomStatus);
                 adminUtils.changeColour(AdminRoomsPage.roomButton, newRoomStatus);
                 this.dispose(); 
             }
-            System.out.println(name);
-            System.out.println(email);
-            System.out.println(storedEmail);
-
-            System.out.println(age);
-            System.out.println(phoneNo);
-            System.out.println(address);
-
-            System.out.println(roomNoString);
-            System.out.println(validRoomNumber);
-            System.out.println(roomStatus);
-            System.out.println(AdminRoomsPage.roomButton.getText());
-
-            System.out.println(checkInDate);
-            System.out.println(checkOutDate);
-        }
         }
     }
 
@@ -541,9 +545,9 @@ public class checkInCustomer extends javax.swing.JFrame {
     private javax.swing.JLabel ageLabel;
     private javax.swing.JButton backBtn;
     private javax.swing.JButton bookRoomBtn;
-    private javax.swing.JTextField checkInField;
+    private com.toedter.calendar.JDateChooser checkInDateChooser;
     private javax.swing.JLabel checkInLabel;
-    private javax.swing.JTextField checkOutField;
+    private com.toedter.calendar.JDateChooser checkOutDateChooser;
     private javax.swing.JLabel checkOutLabel;
     private javax.swing.JRadioButton doubleBedRadioBtn;
     private javax.swing.JTextField emailField;

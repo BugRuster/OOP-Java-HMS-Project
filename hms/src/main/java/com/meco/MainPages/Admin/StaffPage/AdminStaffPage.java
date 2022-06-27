@@ -4,6 +4,7 @@
  */
 package com.meco.MainPages.Admin.StaffPage;
 
+import com.meco.DB.DB;
 import com.meco.MainPages.Admin.CustomerInfoPage.AdminCustomerInfoPage;
 import com.meco.MainPages.Admin.HomePage.AdminHomePage;
 import com.meco.MainPages.Admin.RoomsPage.AdminRoomsPage;
@@ -30,18 +31,40 @@ public class AdminStaffPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        AdminStaffTable = new javax.swing.JTable();
         menuBar = new javax.swing.JMenuBar();
         adminHomeBtn = new javax.swing.JMenu();
         adminCustomerInfoPage = new javax.swing.JMenu();
         adminRoomsBtn = new javax.swing.JMenu();
         adminStaffBtn = new javax.swing.JMenu();
         adminSettingsBtn = new javax.swing.JMenu();
-        refreshBtn = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Admin Staff Page");
+        AdminStaffTable.setFont(new java.awt.Font("AppleGothic", 0, 12)); // NOI18N
+        AdminStaffTable.setModel(new javax.swing.table.DefaultTableModel(
+            DB.getStaffData(DB.getSizeOfTable("staffDetails")),
+            new String [] {
+                "ID", "Name", "Phone No.", "Current Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(AdminStaffTable);
 
         adminHomeBtn.setText("Home");
         adminHomeBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -83,32 +106,17 @@ public class AdminStaffPage extends javax.swing.JFrame {
         });
         menuBar.add(adminSettingsBtn);
 
-        refreshBtn.setText("Refresh");
-        refreshBtn.setMargin(new java.awt.Insets(0, 465, 0, 0));
-        refreshBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshBtnActionPerformed(evt);
-            }
-        });
-        menuBar.add(refreshBtn);
-
         setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(359, 359, 359)
-                .addComponent(jLabel1)
-                .addContainerGap(334, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(215, 215, 215)
-                .addComponent(jLabel1)
-                .addContainerGap(247, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
         );
 
         pack();
@@ -154,14 +162,6 @@ public class AdminStaffPage extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_adminSettingsBtnMouseClicked
 
-    private void refreshBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtnActionPerformed
-        AdminStaffPage page = new AdminStaffPage();
-        page.setVisible(true);
-        page.pack();
-        page.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_refreshBtnActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -199,13 +199,13 @@ public class AdminStaffPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable AdminStaffTable;
     private javax.swing.JMenu adminCustomerInfoPage;
     private javax.swing.JMenu adminHomeBtn;
     private javax.swing.JMenu adminRoomsBtn;
     private javax.swing.JMenu adminSettingsBtn;
     private javax.swing.JMenu adminStaffBtn;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenu refreshBtn;
     // End of variables declaration//GEN-END:variables
 }

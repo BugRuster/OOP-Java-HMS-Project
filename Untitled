@@ -1,9 +1,0 @@
-cd /Users/ashishkumar/Documents/OOPs in Java/OOP-Java-HMS-Project/hms; JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-17.0.1.jdk/Contents/Home "/Applications/NetBeans/Apache NetBeans 13.app/Contents/Resources/NetBeans/netbeans/java/maven/bin/mvn" -Dexec.vmArgs= "-Dexec.args=${exec.vmArgs} -classpath %classpath ${exec.mainClass} ${exec.appArgs}" -Dexec.executable=/Library/Java/JavaVirtualMachines/jdk-17.0.1.jdk/Contents/Home/bin/java -Dexec.mainClass=com.meco.MainPages.Admin.AdminStaffPage -Dexec.classpathScope=runtime -Dexec.appArgs= org.codehaus.mojo:exec-maven-plugin:3.0.0:exec
-Running NetBeans Compile On Save execution. Phase execution is skipped and output directories of dependency projects (with Compile on Save turned on) will be used instead of their jar artifacts.
-Scanning for projects...
-
-----------------------------< com.meco:hms >----------------------------
-Building hms 1.0-SNAPSHOT
---------------------------------[ jar ]---------------------------------
-
---- exec-maven-plugin:3.0.0:exec (default-cli) @ hms ---

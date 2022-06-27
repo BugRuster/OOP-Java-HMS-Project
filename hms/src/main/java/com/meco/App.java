@@ -1,38 +1,22 @@
 package com.meco;
 
-import java.sql.*;
+import com.meco.DB.Tables;
+import com.meco.LoginSignup.LoginPage;
 
 public class App {
     
     public static void main(String arg[]) {
-        Connection connection = null;
-        String username = "ashish";
-        try {
-            // below two lines are used for connectivity.
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/hmsdb",
-                    "root", "ashish123");
-
-            Statement statement;
-            statement = connection.createStatement();
-            ResultSet resultSet;
-            resultSet = statement.executeQuery("select * from userdata;");
-
-            String title;
-            while (resultSet.next()) {
-                title = resultSet.getString("name").trim();
-                if (username.equals(title)) {
-                    System.out.println(username + " " + title);
-                } else {
-                    System.out.println(username + " " + title + "not equal");
-                }
-            }
-            resultSet.close();
-            statement.close();
-            connection.close();
-        } catch (Exception exception) {
-            System.out.println(exception);
+        if (Tables.roomStatusTABLE() && 
+        Tables.roomsDataTABLE() && 
+        Tables.userDataTABLE() && 
+        Tables.staffDetailsTABLE() &&
+        Tables.complainsTABLE()
+        ) {
+            // if all tables are created successfully
+            LoginPage page = new LoginPage();
+            page.setVisible(true);
+            page.pack();
+            page.setLocationRelativeTo(null);
         }
     }
 }

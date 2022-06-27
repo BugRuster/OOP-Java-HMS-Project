@@ -1,6 +1,7 @@
 package com.meco.DB;
 
 import java.sql.*;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -73,6 +74,51 @@ public class DB {
         return data;
     }
 
+    public static String[][] getStaffData(int n) {
+        String data[][] = new String[n][4];
+        Statement stmt;
+        ResultSet rs;
+        String query = "SELECT * FROM staffDetails";
+        try {
+            stmt = getConnection().createStatement();
+            rs = stmt.executeQuery(query);
+            int i = 0;
+            while (rs.next()) {
+                data[i][0] = rs.getString("id");
+                data[i][1] = rs.getString("name");
+                data[i][2] = rs.getString("phone_no");
+                data[i][3] = rs.getString("current_status");
+                i++;
+            }
+        } catch (SQLException e) {System.out.println(e.getMessage());}
+        return data;
+    }
+
+    public static Map<String, String> getAllData(int roomNumber ) {
+        Map<String, String> data = new HashMap<String, String>();
+        Statement stmt;
+        ResultSet rs;
+        String query = "SELECT * FROM roomsData where room_no = '" + roomNumber + "';";
+
+        try {
+            stmt = getConnection().createStatement();
+            rs = stmt.executeQuery(query);
+            while(rs.next()) {
+                data.put("name", rs.getString("name"));
+                data.put("email", rs.getString("email"));
+                data.put("age", String.valueOf(rs.getInt("age")));
+                data.put("phone_no", rs.getString("phone_no"));
+                data.put("room_no", rs.getString("room_no"));
+                data.put("ac_nonAcRoom", rs.getString("ac_nonacRoom"));
+                data.put("single_doubleBed", rs.getString("single_doubleBed"));
+                data.put("meal_noMeal", rs.getString("meal_noMeal"));
+                data.put("check_in", rs.getString("check_in"));
+                data.put("check_out", rs.getString("check_out"));
+            }
+        } catch (Exception e) {System.out.println(e.getMessage());}
+        return data;
+    }
+
     public static int getSizeOfTable(String tableName) {
         Statement stmt;
         ResultSet rs;
@@ -117,22 +163,8 @@ public class DB {
         }
     }
 
-    public static boolean createRoomStatus() {
-        PreparedStatement stmt;
-        String query = "CREATE TABLE IF NOT EXISTS roomStatus (roomNumber INT, statusCode INT);";
-        try {
-            stmt = DB.getConnection().prepareStatement(query);
-            stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Your Table is created", "Success", 2);
-            return true;
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-            return false;
-        }
-    }
-
     public static void addRoomStatus() {
-        if (createRoomStatus()) {
+        if (Tables.roomStatusTABLE()) {
             PreparedStatement stmt;
             Map<String, Integer> map = adminUtils.getBtnStates();
             Set<String> keys = map.keySet();
@@ -184,13 +216,12 @@ public class DB {
         }
     }
 
-    public static boolean deleteUser(String condition, String value) {
+    public static boolean deleteUser(int value) {
         PreparedStatement stmt;
-        String query = "DELETE FROM roomsData WHERE ? = ?";
+        String query = "DELETE FROM roomsData WHERE room_no = ?";
         try {
             stmt = getConnection().prepareStatement(query);
-            stmt.setString(1, condition);
-            stmt.setString(2, value);
+            stmt.setInt(1, value);
             stmt.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -199,6 +230,39 @@ public class DB {
         }
     }
 
+    public static String getCheckOutDateFromDB(String condition) {
+        Statement stmt;
+        String value = null;
+        String query = "SELECT check_out FROM roomsData WHERE room_no = '" + condition + "';";
+        try {
+            stmt = getConnection().createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()) {
+                value = rs.getString("check_out");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } return value;
+    }
+
+    public static String getCheckInDateFromDB(String condition) {
+        Statement stmt;
+        String value = null;
+        String query = "SELECT check_in FROM roomsData WHERE room_no = '" + condition + "';";
+        try {
+            stmt = getConnection().createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()) {
+                value = rs.getString("check_in");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } return value;
+    }
+
     public static void main(String[] args) throws SQLException {
+        boolean x = deleteUser(404);
+        System.out.println(x);
+        
     }
 }

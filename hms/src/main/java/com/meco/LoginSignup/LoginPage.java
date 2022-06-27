@@ -13,6 +13,7 @@ import com.meco.MainPages.Admin.HomePage.AdminHomePage;
 import com.meco.MainPages.Developer.DeveloperPage;
 import com.meco.MainPages.Staff.StaffPage;
 import com.meco.MainPages.User.UserPage;
+import com.meco.MainPages.User.UserSignedInPage;
 
 /**
  *
@@ -220,11 +221,19 @@ public class LoginPage extends javax.swing.JFrame {
                     page.setLocationRelativeTo(null);
                     this.dispose();
                 } else if (loginAs == "User") {
-                    UserPage page = new UserPage();
-                    page.setVisible(true);
-                    page.pack();
-                    page.setLocationRelativeTo(null);
-                    this.dispose();
+                    if (IS_USER_ROOM_BOOKED) {
+                        UserSignedInPage page = new UserSignedInPage();
+                        page.setVisible(true);
+                        page.pack();
+                        page.setLocationRelativeTo(null);
+                        this.dispose();
+                    } else {
+                        UserPage page = new UserPage();
+                        page.setVisible(true);
+                        page.pack();
+                        page.setLocationRelativeTo(null);
+                        this.dispose();
+                    }
                 } else if (loginAs == "Staff") {
                     StaffPage page = new StaffPage();
                     page.setVisible(true);
@@ -326,5 +335,6 @@ public class LoginPage extends javax.swing.JFrame {
     private javax.swing.JPanel sidePanel;
     private javax.swing.JButton signupBtn;
     private javax.swing.JLabel welcomeLabel;
+    public static boolean IS_USER_ROOM_BOOKED = false;
     // End of variables declaration//GEN-END:variables
 }

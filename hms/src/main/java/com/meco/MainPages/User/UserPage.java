@@ -25,31 +25,102 @@ public class UserPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        welcomeLabel = new javax.swing.JLabel();
+        displayPhoto1 = new javax.swing.JLabel();
+        bookRoomBtn = new javax.swing.JButton();
+        displayPhoto2 = new javax.swing.JLabel();
+        displayPhoto3 = new javax.swing.JLabel();
+        displayPhoto4 = new javax.swing.JLabel();
+        displayPhoto5 = new javax.swing.JLabel();
+        displayPhoto6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("User Page");
+        welcomeLabel.setFont(new java.awt.Font("AppleGothic", 1, 36)); // NOI18N
+        welcomeLabel.setText("Welcome to THE Hotel!");
+
+        displayPhoto1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/meco/assets/hotel_img_1.png"))); // NOI18N
+        displayPhoto1.setText("jLabel1");
+
+        bookRoomBtn.setBackground(new java.awt.Color(255, 255, 255));
+        bookRoomBtn.setText("Book a Room");
+        bookRoomBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookRoomBtnActionPerformed(evt);
+            }
+        });
+
+        displayPhoto2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/meco/assets/hotel_img_2.png"))); // NOI18N
+        displayPhoto2.setText("jLabel1");
+
+        displayPhoto3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/meco/assets/hotel_img_3.png"))); // NOI18N
+        displayPhoto3.setText("jLabel1");
+
+        displayPhoto4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/meco/assets/hotel_img_4.png"))); // NOI18N
+        displayPhoto4.setText("jLabel1");
+
+        displayPhoto5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/meco/assets/hotel_img_5.png"))); // NOI18N
+        displayPhoto5.setText("jLabel1");
+
+        displayPhoto6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/meco/assets/hotel_img_6.png"))); // NOI18N
+        displayPhoto6.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(338, 338, 338)
-                .addComponent(jLabel1)
-                .addContainerGap(401, Short.MAX_VALUE))
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(displayPhoto1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(displayPhoto2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)
+                        .addComponent(displayPhoto3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(welcomeLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 191, Short.MAX_VALUE)
+                        .addComponent(bookRoomBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(displayPhoto4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(displayPhoto5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)
+                        .addComponent(displayPhoto6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(39, 39, 39))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(234, 234, 234)
-                .addComponent(jLabel1)
-                .addContainerGap(250, Short.MAX_VALUE))
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(bookRoomBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(welcomeLabel))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(displayPhoto1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(displayPhoto2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(displayPhoto3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(displayPhoto4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(displayPhoto5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(displayPhoto6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bookRoomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookRoomBtnActionPerformed
+        System.out.println("i was here");
+        UserRoomBooking page = new UserRoomBooking();
+        page.setVisible(true);
+        page.pack();
+        page.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_bookRoomBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -87,6 +158,13 @@ public class UserPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton bookRoomBtn;
+    private javax.swing.JLabel displayPhoto1;
+    private javax.swing.JLabel displayPhoto2;
+    private javax.swing.JLabel displayPhoto3;
+    private javax.swing.JLabel displayPhoto4;
+    private javax.swing.JLabel displayPhoto5;
+    private javax.swing.JLabel displayPhoto6;
+    private javax.swing.JLabel welcomeLabel;
     // End of variables declaration//GEN-END:variables
 }
